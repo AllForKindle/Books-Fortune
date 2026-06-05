@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="UTF-8">
     <title>Kindle Book Fortune</title>
     <style>
@@ -12,7 +13,7 @@
         .action-btn { flex: 1; font-size: 16px; font-weight: bold; padding: 12px; background: white; border: 3px solid black; cursor: pointer; }
         #books-container { margin-bottom: 15px; }
         .book-row { display: flex; gap: 5px; margin-bottom: 8px; }
-        .book-input { flex: 1; font-size: 18px; font-weight: bold; padding: 8px; border: 3px solid black; background: white; }
+        .book-input { font-family: sans-serif; flex: 1; font-size: 18px; font-weight: bold; padding: 8px; border: 3px solid black; background: white; color: black; }
         .book-input:focus { outline: none; }
         .delete-btn { font-size: 18px; font-weight: bold; padding: 8px 15px; background: white; border: 3px solid black; cursor: pointer; }
         .build-btn { width: 100%; font-size: 18px; font-weight: bold; padding: 15px; background: black; color: white; border: 4px solid black; cursor: pointer; }
@@ -30,19 +31,19 @@
 
     <div id="setup-screen" class="screen">
         <div class="control-panel">
-            <button class="action-btn" onclick="addBookRow('')">➕ Ряд книг</button>
-            <button class="action-btn" onclick="saveToUrl()">💾 Сохранить</button>
+            <button class="action-btn" onclick="addBookRow('')">+ Ряд книг</button>
+            <button class="action-btn" onclick="saveToUrl()">Сохранить</button>
         </div>
         <div id="books-container"></div>
-        <button class="build-btn" onclick="openFortuneScreen()">👉 СОЗДАТЬ КОЛЕСО ФОРТУНЫ</button>
+        <button class="build-btn" onclick="openFortuneScreen()">СОЗДАТЬ КОЛЕСО ФОРТУНЫ</button>
     </div>
 
     <div id="fortune-screen" class="screen" style="display: none;">
         <div class="fortune-box">
             <div id="result-text">Нажмите кнопку ниже!</div>
         </div>
-        <button class="spin-btn" onclick="pickRandomBook()">🎰 ИСПЫТАТЬ УДАЧУ 🎰</button>
-        <button class="back-btn" onclick="openSetupScreen()">← Назад к списку</button>
+        <button class="spin-btn" onclick="pickRandomBook()">ИСПЫТАТЬ УДАЧУ</button>
+        <button class="back-btn" onclick="openSetupScreen()">Назад к списку</button>
     </div>
 
     <script>
@@ -105,7 +106,6 @@
             alert("ГОТОВО! Обнови закладку в браузере Kindle!");
         }
 
-        /* Вырезан кусок с анимацией для экономии места и FPS */
         function openFortuneScreen() {
             var inputs = document.getElementsByClassName('book-input');
             booksList = [];
@@ -135,7 +135,7 @@
                 return;
             }
             var randomIndex = Math.floor(Math.random() * booksList.length);
-            document.getElementById('result-text').innerText = "📖 " + booksList[randomIndex];
+            document.getElementById('result-text').innerText = booksList[randomIndex];
         }
     </script>
 </body>
