@@ -7,10 +7,10 @@
     <style>
         body { font-family: sans-serif; background: white; color: black; padding: 10px; margin: 0; }
         .header { text-align: center; margin-bottom: 12px; border-bottom: 2px dashed black; padding-bottom: 8px; }
-        .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+        .header h1 { margin: 0; font-size: 22px; font-weight: bold; }
         .screen { display: block; }
         .control-panel { display: flex; gap: 10px; margin-bottom: 15px; }
-        .action-btn { flex: 1; font-size: 16px; font-weight: bold; padding: 12px; background: white; border: 3px solid black; cursor: pointer; }
+        .action-btn { flex: 1; font-size: 15px; font-weight: bold; padding: 12px; background: white; border: 3px solid black; cursor: pointer; }
         #books-container { margin-bottom: 15px; }
         .book-row { display: flex; gap: 5px; margin-bottom: 8px; }
         .book-input { font-family: sans-serif; flex: 1; font-size: 18px; font-weight: bold; padding: 8px; border: 3px solid black; background: white; color: black; }
@@ -26,24 +26,24 @@
 <body>
 
     <div class="header">
-        <h1>Колесо Фортуны</h1>
+        <h1>Колесо Фортуны / Fortune Wheel</h1>
     </div>
 
     <div id="setup-screen" class="screen">
         <div class="control-panel">
-            <button class="action-btn" onclick="addBookRow('')">+ Ряд книг</button>
-            <button class="action-btn" onclick="saveToUrl()">Сохранить</button>
+            <button class="action-btn" onclick="addBookRow('')">+ Ряд / + Row</button>
+            <button class="action-btn" onclick="saveToUrl()">Сохранить / Save</button>
         </div>
         <div id="books-container"></div>
-        <button class="build-btn" onclick="openFortuneScreen()">СОЗДАТЬ КОЛЕСО ФОРТУНЫ</button>
+        <button class="build-btn" onclick="openFortuneScreen()">СОЗДАТЬ КОЛЕСО / CREATE WHEEL</button>
     </div>
 
     <div id="fortune-screen" class="screen" style="display: none;">
         <div class="fortune-box">
-            <div id="result-text">Нажмите кнопку ниже!</div>
+            <div id="result-text">Нажмите кнопку! / Press the button!</div>
         </div>
-        <button class="spin-btn" onclick="pickRandomBook()">ИСПЫТАТЬ УДАЧУ</button>
-        <button class="back-btn" onclick="openSetupScreen()">Назад к списку</button>
+        <button class="spin-btn" onclick="pickRandomBook()">ИСПЫТАТЬ УДАЧУ / SPIN</button>
+        <button class="back-btn" onclick="openSetupScreen()"><- Назад / Back</button>
     </div>
 
     <script>
@@ -78,7 +78,7 @@
             var input = document.createElement('input');
             input.type = 'text';
             input.className = 'book-input';
-            input.placeholder = 'Название книги...';
+            input.placeholder = 'Книга / Book...';
             input.value = value;
             
             var delBtn = document.createElement('button');
@@ -103,7 +103,7 @@
             }
             var combined = encodeURIComponent(currentBooks.join('|||'));
             window.location.hash = combined;
-            alert("ГОТОВО! Обнови закладку в браузере Kindle!");
+            alert("Сохранено! Обнови закладку. / Saved! Refresh bookmark.");
         }
 
         function openFortuneScreen() {
@@ -116,12 +116,12 @@
                 }
             }
             if (booksList.length === 0) {
-                alert("Ошибка: Заполни хотя бы один ряд!");
+                alert("Ошибка: Пустой список! / Error: List is empty!");
                 return;
             }
             document.getElementById('setup-screen').style.display = 'none';
             document.getElementById('fortune-screen').style.display = 'block';
-            document.getElementById('result-text').innerText = "Готово к старту!";
+            document.getElementById('result-text').innerText = "Готово! / Ready!";
         }
 
         function openSetupScreen() {
@@ -129,13 +129,14 @@
             document.getElementById('setup-screen').style.display = 'block';
         }
 
+        // Рандом выдает чисто текст книги со значком стрелочки
         function pickRandomBook() {
             if (booksList.length === 0) {
-                document.getElementById('result-text').innerText = "Список пуст...";
+                document.getElementById('result-text').innerText = "...";
                 return;
             }
             var randomIndex = Math.floor(Math.random() * booksList.length);
-            document.getElementById('result-text').innerText = booksList[randomIndex];
+            document.getElementById('result-text').innerText = "-> " + booksList[randomIndex];
         }
     </script>
 </body>
